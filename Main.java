@@ -1,65 +1,26 @@
-package com.greatlearning.task3;
+package com.greatlearning.homework3;
 
-import java.util.Scanner;
-import java.util.Stack;
+import com.greatlearning.homework3.Transaction.Node;
 
 public class Main{
-	
-	public static void main(String args[]){
+
+	public static void main(String[] args){
 		
-		Scanner object=new Scanner(System.in);
+		Transaction transaction=new Transaction();
 		
-		System.out.println("Enter The Total Number Of Floors In The Building:");
-		int value=object.nextInt();
-		int array[]=new int[value];
+		Node root=new Node(50);
+		Node node1=new Node(30);
+		Node node2=new Node(60);
+		Node node3=new Node(10);
+		Node node4=new Node(40);
 		
-		for(int i=0;i<value;i++){
-			
-			System.out.println("Enter The Floor Size Given On Day:"+i);
-			array[i]=object.nextInt();
-			
-		}
+		root.left=node1;
+		root.right=node2;
+		root.left.left=node3;
+		root.right.left=node4;
 		
-		int size[]=array.clone();
-		Construction construction=new Construction();
-		construction.mergeSortArray(size);
-		
-		Stack<Integer> stacks=new Stack<Integer>();
-		
-		for(int i:size)
-			stacks.push(i);
-		
-		Stack<Integer> stacklist=new Stack<Integer>();
-		System.out.println("The Order Of Construction Is As Follows:");
-		
-		for(int i=0;i<value;i++){
-			
-			System.out.println("Day:"+i);
-			int list=array[i];
-			int flag=stacks.peek();
-			
-			if(list != flag)
-				stacklist.push(list);
-			
-			else{
-				
-				System.out.print(stacks.pop()+" ");
-				
-				while(!stacklist.isEmpty()&&stacks.peek() == stacklist.peek()){
-					
-					int delete=stacks.pop();
-					stacklist.pop();
-					System.out.print(delete+" ");
-					
-				}
-				
-			}
-			
-			System.out.println();
-			
-		}
-		
-		object.close();
+		transaction.binarySearchTreeToSkewedTree(root);
+		transaction.traversingThroughRightSkewedTree(Transaction.postchild);
 		
 	}
 	
